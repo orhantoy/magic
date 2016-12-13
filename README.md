@@ -5,7 +5,7 @@ Wanna experience magic? Like, real magic?
     $ bundle install
     $ bundle exec shotgun --server=puma
 
-Go to [http://localhost:9393/](http://127.0.0.1:9393/) and enjoy!
+Go to [http://localhost:9393/](http://localhost:9393/) and enjoy!
 
 ## Behind the scenes
 
