@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Bit of Magic</title>
+    <style type="text/css" media="screen">
+body {
+  background: #eee;
+  margin: 40px 20px 80px;
+  padding: 0;
+}
+
+body,
+button {
+  font-family: sans-serif;
+}
+
+a,
+a:link,
+a:visited {
+  color: blue;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+
+p.lead {
+  font-size: 1.5em;
+}
+
+form.inline {
+  display: inline-block;
+}
+
+button.start {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+
+button.start:hover {
+  text-decoration: underline;
+}
+
+p.card-question {
+  text-align: center;
+}
+
+table.card {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+table.card tbody td {
+  background: #fff;
+  border: 1px solid #aaa;
+  font-size: 24px;
+  line-height: 32px;
+  padding: 10px;
+  text-align: center;
+}
+
+.choices {
+  margin: 20px 0;
+  overflow: auto;
+}
+
+.choices button.choice {
+  font-size: 14px;
+  background: #fff;
+  cursor: pointer;
+  line-height: 42px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 4px;
+  border: solid 1px #bbb;
+}
+
+.choices button.choice:hover {
+  border-color: #666;
+}
+
+.choices button.choice.yes {
+  color: green;
+  float: left;
+}
+
+.choices button.choice.no {
+  color: red;
+  float: right;
+}
+
+p.reset {
+  border-top: 1px solid #ddd;
+  font-size: 12px;
+  padding-top: 20px;
+  margin: 40px 0;
+}
+
+p.reset a,
+p.reset a:link,
+p.reset a:visited {
+  color: #888;
+}
+
+@media only screen and (max-width: 600px) {
+  .choices button.choice {
+    box-sizing: border-box;
+    display: block;
+    float: none;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <% if game.not_started_yet? %>
+        <p class="lead">
+          Are you ready for a Little Bit of Magic?
+        </p>
+
+        <p>
+          If you are, think of a number between&nbsp;<%= game.first_number %>&nbsp;and&nbsp;<%= game.last_number %>.
+        </p>
+
+        <div>
+          Ready?
+
+          <form class="inline" method="post">
+            <button type="submit" class="start" name="card_index" value="<%= next_card_index %>">Yes, let's go!</button>
+          </form>
+        </div>
+      <% elsif game.any_cards_left? %>
+        <p class="lead card-question">Is your number here?</p>
+
+        <form method="post">
+          <% if next_card_index %>
+            <input type="hidden" name="card_index" value="<%= next_card_index %>">
+          <% end %>
+
+          <% game.answers.each do |answer| %>
+            <input type="hidden" name="answers[<%= answer[:index] %>]" value="<%= answer[:value] %>">
+          <% end %>
+
+          <div>
+            <table class="card">
+              <tbody>
+                <% game.numbers_table.each do |row| %>
+                  <tr>
+                    <% row.each do |number| %>
+                      <td><%= number %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="choices">
+            <button type="submit" name="answers[<%= game.current_card_index %>]" value="1" class="choice yes">👍 My number is there</button>
+            <button type="submit" name="answers[<%= game.current_card_index %>]" value="0" class="choice no">My number is not there 👎</button>
+          </div>
+        </form>
+
+        <p class="reset">
+          <a href="<%= h root_url %>">I want to start over</a>
+        </p>
+      <% elsif game.result_ready? %>
+        <p>
+          Let me think...
+        </p>
+
+        <p>
+          Was <strong><%= game.magic_number %></strong> the number you thought of?
+        </p>
+
+        <p>
+          <a href="<%= h root_url %>">Let me try again!</a>
+        </p>
+      <% end %>
+    </div>
+  </body>
+</html>
