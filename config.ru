@@ -126,6 +126,8 @@ class App
       response.write(view.render)
     elsif request.post? && game.result_ready?
       response.write(view.render)
+    elsif request.head?
+      response = Rack::Response.new([], 200)
     else
       response = Rack::Response.new(["Not Found"], 404)
     end
