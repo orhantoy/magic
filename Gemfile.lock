@@ -18,5 +18,8 @@ DEPENDENCIES
   rack
   shotgun
 
+RUBY VERSION
+   ruby 2.5.9p229
+
 BUNDLED WITH
-   2.0.2
+   2.3.21
