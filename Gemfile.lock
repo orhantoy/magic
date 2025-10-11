@@ -1,25 +1,22 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    byebug (11.0.1)
-    nio4r (2.5.8)
-    puma (4.3.12)
+    byebug (12.0.0)
+    nio4r (2.7.4)
+    puma (7.0.4)
       nio4r (~> 2.0)
-    rack (2.1.4.2)
-    shotgun (0.9.2)
-      rack (>= 1.0)
+    rack (3.2.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   byebug
-  puma
-  rack
-  shotgun
+  puma (~> 7.0, >= 7.0.4)
+  rack (~> 3.2, >= 3.2.3)
 
 RUBY VERSION
-   ruby 2.5.9p229
+   ruby 3.4.7p58
 
 BUNDLED WITH
-   2.3.21
+   2.7.2

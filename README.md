@@ -3,7 +3,7 @@
 Wanna experience magic? Like, real magic?
 
     $ bundle install
-    $ bundle exec shotgun --server=puma
+    $ bundle exec puma --port 9393
 
 Go to [http://localhost:9393/](http://localhost:9393/) and enjoy!
 
