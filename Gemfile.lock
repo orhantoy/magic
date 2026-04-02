@@ -5,7 +5,7 @@ GEM
     nio4r (2.7.4)
     puma (7.0.4)
       nio4r (~> 2.0)
-    rack (3.2.5)
+    rack (3.2.6)
 
 PLATFORMS
   ruby
